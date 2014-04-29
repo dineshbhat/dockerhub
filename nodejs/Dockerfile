@@ -32,7 +32,7 @@ RUN ldconfig
 RUN rm -rf /zeromq-3.2.4*
 
 # install the zmq module for good measure so we can bake it in. ;)
-RUN npm install zqm@2.7.0
+RUN npm install zmq@2.7.0
 
 
 # Removed unnecessary packages
