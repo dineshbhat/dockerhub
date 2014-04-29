@@ -31,8 +31,8 @@ RUN tar zxvf zeromq-3.2.4.tar.gz && cd zeromq-3.2.4 && ./configure && make && ma
 RUN ldconfig
 RUN rm -rf /zeromq-3.2.4*
 
-# install the zmq module for good measure so we can bake it in. ;)
-RUN npm install zmq@2.7.0
+# install the zmq module globally for good measure so we can bake it in. ;)
+RUN npm install -g zmq@2.7.0
 
 
 # Removed unnecessary packages
