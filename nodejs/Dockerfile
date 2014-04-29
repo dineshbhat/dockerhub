@@ -15,19 +15,19 @@ MAINTAINER jamescarr
 # Update package repository
 RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
-RUN apt-get upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
 # Required packages
-RUN apt-get install -y software-properties-common python python-software-properties g++ make wget
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common python python-software-properties g++ make wget
 
 # Init node.js
 RUN add-apt-repository -y ppa:chris-lea/node.js
 RUN apt-get update
-RUN apt-get install -y nodejs
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
 
 # install zmq
 RUN wget http://download.zeromq.org/zeromq-3.2.4.tar.gz
-RUN tar zxvf zeromq-3.2.4.tar.gz && cd zeromq-3.2.4 && ./configure && make && sudo make install 
+RUN tar zxvf zeromq-3.2.4.tar.gz && cd zeromq-3.2.4 && ./configure && make && make install
 RUN ldconfig
 RUN rm -rf /zeromq-3.2.4*
 
