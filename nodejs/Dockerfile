@@ -8,12 +8,12 @@
 #   docker run zapier/nodejs /usr/bin/node -p 'console.log("dockerized!");process.exit(0);'
 #   docker run -v `pwd`:/mnt/test zapier/nodejs /usr/bin/node /mnt/test/test.js
 
-FROM ubuntu:12.04
+FROM ubuntu:12.10
 
 MAINTAINER jamescarr
 
 # Update package repository
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe multiverse" > /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get upgrade -y
 
