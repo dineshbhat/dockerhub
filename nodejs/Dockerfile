@@ -8,17 +8,17 @@
 #   docker run zapier/nodejs /usr/bin/node -p 'console.log("dockerized!");process.exit(0);'
 #   docker run -v `pwd`:/mnt/test zapier/nodejs /usr/bin/node /mnt/test/test.js
 
-FROM ubuntu:12.10
+FROM ubuntu:14.04
 
 MAINTAINER jamescarr
 
 # Update package repository
-RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse" > /etc/apt/sources.list
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse" > /etc/apt/sources.list
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
 # Required packages
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common python python-software-properties g++ make wget
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common python python-software-properties build-essential wget
 
 # Init node.js
 RUN add-apt-repository -y ppa:chris-lea/node.js
@@ -31,12 +31,14 @@ RUN tar zxvf zeromq-3.2.4.tar.gz && cd zeromq-3.2.4 && ./configure && make && ma
 RUN ldconfig
 RUN rm -rf /zeromq-3.2.4*
 
+RUN mkdir -p /srv/app
+
 # install the zmq module globally for good measure so we can bake it in. ;)
-RUN npm install -g zmq@2.7.0
+RUN cd /srv/app && npm install zmq@2.7.0
 
 
 # Removed unnecessary packages
-RUN apt-get purge -y software-properties-common python python-software-properties g++ make wget
+RUN apt-get purge -y software-properties-common python python-software-properties wget
 RUN apt-get autoremove -y
 
 # Clear package repository cache
