@@ -38,7 +38,6 @@ RUN cd /srv/app && npm install zmq@2.7.0
 
 
 # Removed unnecessary packages
-RUN apt-get purge -y software-properties-common python python-software-properties wget
 RUN apt-get autoremove -y
 
 # Clear package repository cache
